@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Preview from './Preview'
 import { AiOutlineLoading } from 'react-icons/ai';
+import axios from 'axios';
 
 const Imageforgery = () => {
   const [image1, setImage1] = useState(null);
@@ -60,11 +61,30 @@ const Imageforgery = () => {
 
 
 
-const handleButtonClick =()=>{
+  const handleButtonClick = async () => {
+    document.getElementById('datatext').classList.add('hidden')
+    document.getElementById('spin').classList.remove('hidden')
 
-  console.log("hello")
+    // try {
+    //   const originalImage = image1; 
+    //   const editedImage = image2; 
+    //   const response = await axios.get('https://bajajhealthapi.onrender.com/data_manipulation', {
+    //     original_image: originalImage,
+    //     edited_image: editedImage,
+    //   });
+    //   document.getElementById('datatext').classList.add('hidden')
+    // document.getElementById('spin').classList.remove('hidden')
+  
+    //   console.log('API Response:', response.data);
+    // } catch (error) {
+    //   console.error('Error:', error.message);
+    // }
 
-}
+  };
+
+
+
+
 
   return (
     <div className='bg-gradient-to-r from-[#2d1c5a] to-[#1F1B2A]'>
@@ -81,7 +101,7 @@ const handleButtonClick =()=>{
            </div>
 
         <div className='max-w-[600px] z-20 max-h-[650px]  m-auto relative my-auto flex ' >
-            <img src={activeimage} alt="" className='max-w-[650px] z-20 max-h-[650px] bg-green-800 m-auto relative mt-6 '  />
+            <img src={activeimage} alt="" className='max-w-[650px] z-20 max-h-[650px] bg-black m-auto relative mt-6 '  />
 
         </div>
 
@@ -97,7 +117,7 @@ const handleButtonClick =()=>{
 
     <div className="p-4 h-screen flex justify-center ">
       <div className="text-white text-center">
-        <h1 className="text-5xl font-extrabold mb-4 mt-24">Digital Forgery Detection</h1>
+        <h1 className="text-5xl font-extrabold mb-4 mt-24">Digital Forgery Detector</h1>
 
         <div className="flex justify-around mt-20  h-[220px]">
           {/* Image 1 */}
@@ -241,7 +261,7 @@ const handleButtonClick =()=>{
           className="hover:bg-[#483381] shadow-lg w-[230px] m-auto rounded-md px-4 py-2 mt-12 bg-[#3c2677] cursor-pointer transition duration-300 ease-in-out"
           onClick={handleButtonClick}
         >
-          <p id='datatext' className='hidde '>Check Digital Forgery</p>
+          <p id='datatext' className=' '>Check Digital Forgery</p>
           
           <AiOutlineLoading id='spin' className='animate-spin font-bold m-auto text-[25px] hidden  '/>
         </button>

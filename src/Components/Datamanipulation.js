@@ -66,18 +66,32 @@ const DataManipulation = () => {
     document.getElementById('spin').classList.remove('hidden')
 
     try {
-      const originalImage = image1; 
-      const editedImage = image2; 
-      const response = await axios.get('https://bajajhealthapi.onrender.com/data_manipulation', {
-        original_image: originalImage,
-        edited_image: editedImage,
-      });
-      document.getElementById('datatext').classList.add('hidden')
-    document.getElementById('spin').classList.remove('hidden')
+      const apiUrl = 'https://bajajhealthapi.onrender.com/data_manipulation';
+  
+      // Replace 'your_api_key' with the actual API key if required
+      const apiKey = 'your_api_key';
+  
+      const response = await axios.post(
+        apiUrl,
+        {
+          original_image: image1,
+          edited_image: image2,
+        },
+        {
+          headers: {
+            'Content-Type': 'application/json',
+            // Add API key to headers if required
+            // 'Authorization': `Bearer ${apiKey}`,
+          },
+        }
+      );
   
       console.log('API Response:', response.data);
+      // You can handle the response data as needed here
+  
     } catch (error) {
-      console.error('Error:', error.message);
+      console.error('API Error:', error.message);
+      // You can handle the error as needed here
     }
 
   };
