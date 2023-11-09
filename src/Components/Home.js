@@ -16,14 +16,6 @@ const Home = () => {
           <p className="text-sm text-gray-300 animate-fadeIn">Join us in crafting the future of coding!</p>
         </div>
 
-        <div className="text-white text-center animate-fadeIn mb-8">
-          <h2 className="text-xl font-semibold mb-3">Team Members:</h2>
-          <ul className="text-gray-400">
-            <li>Sandip Sarkar</li>
-            <li>Bijit Sinha</li>
-            <li>Ankit Raj</li>
-          </ul>
-        </div>
 
         <p className="text-sm text-gray-400 animate-fadeIn">We look forward to delivering innovative solutions and driving success in our projects.</p>
       </div>

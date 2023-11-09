@@ -11,6 +11,7 @@ const Imageforgery = () => {
   const [loading1, setLoading1] = useState(false);
   const [loading2, setLoading2] = useState(false);
 
+
   const removeImage = (imageNumber) => {
     if (imageNumber === 1) {
       setImage1(null);
@@ -18,6 +19,7 @@ const Imageforgery = () => {
       setImage2(null);
     }
   };
+
 
   const handleImageUpload = (e, setImage,setimagenow, setLoading) => {
     const file = e.target.files[0];
@@ -82,6 +84,9 @@ const Imageforgery = () => {
     const element = document.getElementById('modal');
     element.classList.remove('hidden');
     element.classList.add('flex', 'popup'); 
+
+    document.getElementById('spin').classList.add('hidden')
+    document.getElementById('datatext').classList.remove('hidden')
 
     } catch (error) {
       console.error('Error uploading images:', error.response || error.message || error);
