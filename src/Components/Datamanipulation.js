@@ -65,8 +65,6 @@ const DataManipulation = () => {
     document.getElementById('datatext').classList.add('hidden')
     document.getElementById('spin').classList.remove('hidden')
 
-    document.getElementById('datatext').classList.add('hidden')
-  document.getElementById('spin').classList.remove('hidden')
     try {
       const originalImage = image1; 
       const editedImage = image2; 
@@ -74,6 +72,8 @@ const DataManipulation = () => {
         original_image: originalImage,
         edited_image: editedImage,
       });
+      document.getElementById('datatext').classList.add('hidden')
+    document.getElementById('spin').classList.remove('hidden')
   
       console.log('API Response:', response.data);
     } catch (error) {
