@@ -8,6 +8,7 @@ import {
 import Home from './Components/Home';
 import Datamanipulation from './Components/Datamanipulation';
 import Imageforgery from './Components/Imageforgery';
+import Preview from './Components/Preview';
 
 
 function App() {
@@ -20,6 +21,7 @@ function App() {
       <Route exact path="/Datamanipulation" element={<Datamanipulation/>}/>
 
       <Route exact path="/Imageforgery" element={<Imageforgery />}/>
+      <Route exact path="/Preview" element={<Preview />}/>
 
 
     </Routes>

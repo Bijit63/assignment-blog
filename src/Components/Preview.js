@@ -19,7 +19,7 @@ const Preview = (props) => {
     }
   return (
 
-    <div id='modal' className={`${props.display} w-[100vw] h-[100vh] absolute `}>
+    <div id='modal' className={` w-[100vw] h-[100vh] absolute `}>
 
         <div onClick={hide} className='w-[100vw] h-[100vh] bg-black opacity-20 cursor-pointer absolute z-10 top-0 bottom-0'> </div>
 
@@ -27,6 +27,8 @@ const Preview = (props) => {
             <img src={props.image} alt="" />
 
         </div>
+
+        <button>download</button>
 
 
     </div>

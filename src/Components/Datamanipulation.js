@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Preview from './Preview'
-import { AiOutlineLoading } from 'react-icons/ai';
+import { AiOutlineLoading ,AiFillWarning} from 'react-icons/ai';
+import { TiTickOutline} from 'react-icons/ti';
 import axios from 'axios';
 
 const DataManipulation = () => {
@@ -53,49 +54,64 @@ const DataManipulation = () => {
       element.classList.add('hidden');
     }
   };
+  
+  const hideres = () => {
+    const element = document.getElementById('modalres');
+  
+    if (element.classList.contains('flex')) {
+      element.classList.remove('flex', 'popup'); // Remove the popup animation class
+      element.classList.add('hidden');
+    }
+  };
 
 
 
+
+  
+  const handleFileChange = (event, setImage) => {
+    const file = event.target.files[0];
+    setImage(file);
+  };
 
 
 
 
 
   const handleButtonClick = async () => {
+
     document.getElementById('datatext').classList.add('hidden')
     document.getElementById('spin').classList.remove('hidden')
 
+    
+
+    // const element = document.getElementById('modalres');
+    // element.classList.remove('hidden');
+    // element.classList.add('flex', 'popup'); 
+
+
     try {
-      const apiUrl = 'https://bajajhealthapi.onrender.com/data_manipulation';
-  
-      // Replace 'your_api_key' with the actual API key if required
-      const apiKey = 'your_api_key';
-  
-      const response = await axios.post(
-        apiUrl,
+      const formData = new FormData();
+      formData.append("original_image", originalImage);
+      formData.append("edited_image", editedImage);
+
+      const response = await fetch(
+        "https://bajajhealthapi.onrender.com/data_manipulation",
         {
-          original_image: image1,
-          edited_image: image2,
-        },
-        {
-          headers: {
-            'Content-Type': 'application/json',
-            // Add API key to headers if required
-            // 'Authorization': `Bearer ${apiKey}`,
-          },
+          method: "POST",
+          body: formData
         }
       );
-  
-      console.log('API Response:', response.data);
-      // You can handle the response data as needed here
-  
+
+      if (response.ok) {
+        const data = await response.json();
+        console.log("API Response:", data);
+      } else {
+        console.error("Error:", response.statusText);
+      }
     } catch (error) {
-      console.error('API Error:', error.message);
-      // You can handle the error as needed here
+      console.error("Request failed:", error);
     }
-
   };
-
 
 
 
@@ -105,7 +121,7 @@ const DataManipulation = () => {
 
 
 
-{/* MOdal  */}
+{/* MOdal for image */}
 
         <div  id='modal' className='hidden w-[100vw] h-[100vh] absolute'>
 
@@ -117,6 +133,32 @@ const DataManipulation = () => {
         <div className='max-w-[600px] z-20 max-h-[650px]  m-auto relative my-auto flex ' >
             <img src={activeimage} alt="" className='max-w-[650px] z-20 max-h-[650px] bg-black m-auto relative mt-6 '  />
 
+        </div>
+
+
+    </div>
+      
+
+{/* MOdal  */}
+
+
+
+{/* MOdal for res */}
+
+        <div  id='modalres' className='hidden w-[100vw] h-[100vh] absolute'>
+
+        <div id='modalbackres' onClick={hideres} className='w-[100vw] h-[100vh]  cursor-pointer absolute z-10 top-0 bottom-0'>
+          {/* <p className='text-8xl '>x</p> */}
+          
+           </div>
+
+        <div className=' z-20  max-h-[240px] rounded-md shadow-md items-center justify-center min-h-[240px] max-w-[500px] min-w-[500px] bg-[#31174c]  m-auto relative my-auto flex space-x-2 ' >
+          
+          <AiFillWarning className='text-4xl text-yellow-500 ' />
+          <p className='text-white text-3xl '>Data Manipulation Detected</p>         
+{/* 
+          <TiTickOutline className='text-5xl text-green-500 ' />
+          <p className='text-white text-3xl '>No Data Manipulation</p>          */}
         </div>
 
 

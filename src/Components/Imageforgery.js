@@ -85,6 +85,21 @@ const Imageforgery = () => {
 
 
 
+  const handleDownload = () => {
+    // Assuming props.image is the URL of the image
+    const imageUrl = activeimage;
+
+    // Create a virtual anchor element
+    const downloadLink = document.createElement('a');
+    downloadLink.href = imageUrl;
+    downloadLink.download = 'downloaded_image.jpg'; // Specify the filename
+
+    // Trigger a click on the anchor element
+    downloadLink.click();
+  };
+
+
+
 
   return (
     <div className='bg-gradient-to-r from-[#2d1c5a] to-[#1F1B2A]'>
@@ -100,10 +115,15 @@ const Imageforgery = () => {
           
            </div>
 
-        <div className='max-w-[600px] z-20 max-h-[650px]  m-auto relative my-auto flex ' >
+      <div className='max-w-[600px] z-20 max-h-[650px]  m-auto relative my-auto flex flex-col  ' >
+
+        <div >
             <img src={activeimage} alt="" className='max-w-[650px] z-20 max-h-[650px] bg-black m-auto relative mt-6 '  />
 
         </div>
+
+        <button className='z-20 relative bg-blue-800 w-fit px-3 py-1 rounded-lg mt-1 mx-auto text-lg text-white' onClick={()=>{handleDownload()}}>Download</button>
+      </div>
 
 
     </div>
