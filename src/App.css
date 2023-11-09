@@ -1,0 +1,82 @@
+body{
+  font-family: 'Inter', sans-serif;
+  overflow-x: hidden;
+}
+body::-webkit-scrollbar {
+  width: 0px; /* Adjust the width as needed */
+}
+
+body::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+
+body::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.3);
+  border-radius: 0.25rem;
+}
+
+body::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+
+#Team{
+  text-shadow: 1px 0px 10px rgb(91, 103, 199);
+}
+
+
+#modalbakc{
+  backdrop-filter: blur(100px); /* Adjust the blur value as needed */
+}
+
+
+
+.button {
+  background-color: #2270b9; /* Dark Blue */
+  color: white;
+  padding: 12px 24px;
+  border-radius: 20px;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  transition-duration: 0.3s;
+  cursor: pointer;
+}
+
+.button:hover {
+  background-color: rgb(13, 103, 163); /* Slightly darker shade on hover */
+  transform: scale(1.05);
+}
+
+
+.animate-fadeInUp {
+  animation: fadeInUp 1s ease-in-out;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+
+
+
+@keyframes modalPopup {
+  from {
+    transform: scale(0);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+
+.popup {
+  animation: modalPopup 0.05s ease-out; /* Adjust the duration and easing as needed */
+}
