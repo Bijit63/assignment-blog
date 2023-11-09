@@ -4,6 +4,8 @@ import { AiOutlineLoading } from 'react-icons/ai';
 import axios from 'axios';
 
 const Imageforgery = () => {
+  const [original, setoriginal] = useState(null);
+  const [edited, setedited] = useState(null);
   const [image1, setImage1] = useState(null);
   const [image2, setImage2] = useState(null);
   const [loading1, setLoading1] = useState(false);
@@ -17,8 +19,9 @@ const Imageforgery = () => {
     }
   };
 
-  const handleImageUpload = (e, setImage, setLoading) => {
+  const handleImageUpload = (e, setImage,setimagenow, setLoading) => {
     const file = e.target.files[0];
+    setimagenow(file);
 
     if (file) {
       setLoading(true);
@@ -65,38 +68,33 @@ const Imageforgery = () => {
     document.getElementById('datatext').classList.add('hidden')
     document.getElementById('spin').classList.remove('hidden')
 
-    // try {
-    //   const originalImage = image1; 
-    //   const editedImage = image2; 
-    //   const response = await axios.get('https://bajajhealthapi.onrender.com/data_manipulation', {
-    //     original_image: originalImage,
-    //     edited_image: editedImage,
-    //   });
-    //   document.getElementById('datatext').classList.add('hidden')
-    // document.getElementById('spin').classList.remove('hidden')
+
+    try {
+      const formData = new FormData();
+      formData.append('original_image', original, 'original.jpg');
+      formData.append('edited_image', edited, 'edited.jpg');
+    
+      const response = await axios.post('https://bajajhealthapi.onrender.com/data_forgery', formData);
+    
+      console.log('Response:', response.data.message);
+      setactiveimage(response.data.message);
   
-    //   console.log('API Response:', response.data);
-    // } catch (error) {
-    //   console.error('Error:', error.message);
-    // }
+    const element = document.getElementById('modal');
+    element.classList.remove('hidden');
+    element.classList.add('flex', 'popup'); 
+
+    } catch (error) {
+      console.error('Error uploading images:', error.response || error.message || error);
+
+      // Handle errors
+    }
 
   };
 
 
 
 
-  const handleDownload = () => {
-    // Assuming props.image is the URL of the image
-    const imageUrl = activeimage;
 
-    // Create a virtual anchor element
-    const downloadLink = document.createElement('a');
-    downloadLink.href = imageUrl;
-    downloadLink.download = 'downloaded_image.jpg'; // Specify the filename
-
-    // Trigger a click on the anchor element
-    downloadLink.click();
-  };
 
 
 
@@ -122,7 +120,6 @@ const Imageforgery = () => {
 
         </div>
 
-        <button className='z-20 relative bg-blue-800 w-fit px-3 py-1 rounded-lg mt-1 mx-auto text-lg text-white' onClick={()=>{handleDownload()}}>Download</button>
       </div>
 
 
@@ -177,7 +174,7 @@ const Imageforgery = () => {
                 <input
                   type="file"
                   accept="image/*"
-                  onChange={(e) => handleImageUpload(e, setImage1, setLoading1)}
+                  onChange={(e) => handleImageUpload(e, setImage1,setoriginal, setLoading1)}
                   className="hidden"
                 />
                 <div className="flex flex-col items-center justify-center h-full">
@@ -243,7 +240,7 @@ const Imageforgery = () => {
                 <input
                   type="file"
                   accept="image/*"
-                  onChange={(e) => handleImageUpload(e, setImage2, setLoading2)}
+                  onChange={(e) => handleImageUpload(e, setImage2,setedited,setLoading2)}
                   className="hidden"
                 />
                 <div className="flex flex-col items-center justify-center h-full">

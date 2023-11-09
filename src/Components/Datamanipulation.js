@@ -5,10 +5,13 @@ import { TiTickOutline} from 'react-icons/ti';
 import axios from 'axios';
 
 const DataManipulation = () => {
+  const [originalimage, setoriginalimage] = useState(null);
+  const [editedimage, seteditedimage] = useState(null);
   const [image1, setImage1] = useState(null);
   const [image2, setImage2] = useState(null);
   const [loading1, setLoading1] = useState(false);
   const [loading2, setLoading2] = useState(false);
+  
 
   const removeImage = (imageNumber) => {
     if (imageNumber === 1) {
@@ -18,8 +21,9 @@ const DataManipulation = () => {
     }
   };
 
-  const handleImageUpload = (e, setImage, setLoading) => {
+  const handleImageUpload = (e, setImage,setimagenow, setLoading) => {
     const file = e.target.files[0];
+    setimagenow(file)
 
     if (file) {
       setLoading(true);
@@ -67,51 +71,40 @@ const DataManipulation = () => {
 
 
 
-  
-  const handleFileChange = (event, setImage) => {
-    const file = event.target.files[0];
-    setImage(file);
-  };
-
 
 
 
 
   const handleButtonClick = async () => {
-
     document.getElementById('datatext').classList.add('hidden')
     document.getElementById('spin').classList.remove('hidden')
 
     
 
-    // const element = document.getElementById('modalres');
-    // element.classList.remove('hidden');
-    // element.classList.add('flex', 'popup'); 
-
-
+  
     try {
       const formData = new FormData();
-      formData.append("original_image", originalImage);
-      formData.append("edited_image", editedImage);
+      formData.append('original_image', originalimage, 'original.jpg');
+      formData.append('edited_image', editedimage, 'edited.jpg');
+    
+      const response = await axios.post('https://bajajhealthapi.onrender.com/data_manipulation', formData);
+    
+      console.log('Response:', response.data.message);
+      
+      alert(response.data.message)
+      document.getElementById('spin').classList.add('hidden')
+      document.getElementById('datatext').classList.remove('hidden')
 
-      const response = await fetch(
-        "https://bajajhealthapi.onrender.com/data_manipulation",
-        {
-          method: "POST",
-          body: formData
-        }
-      );
 
-      if (response.ok) {
-        const data = await response.json();
-        console.log("API Response:", data);
-      } else {
-        console.error("Error:", response.statusText);
-      }
     } catch (error) {
-      console.error("Request failed:", error);
+      console.error('Error uploading images:', error.response || error.message || error);
+      // Handle errors
     }
+    
   };
+
+
+  
 
 
 
@@ -213,7 +206,7 @@ const DataManipulation = () => {
                 <input
                   type="file"
                   accept="image/*"
-                  onChange={(e) => handleImageUpload(e, setImage1, setLoading1)}
+                  onChange={(e) => handleImageUpload(e, setImage1,setoriginalimage, setLoading1)}
                   className="hidden"
                 />
                 <div className="flex flex-col items-center justify-center h-full">
@@ -279,7 +272,7 @@ const DataManipulation = () => {
                 <input
                   type="file"
                   accept="image/*"
-                  onChange={(e) => handleImageUpload(e, setImage2, setLoading2)}
+                  onChange={(e) => handleImageUpload(e, setImage2,seteditedimage, setLoading2)}
                   className="hidden"
                 />
                 <div className="flex flex-col items-center justify-center h-full">
