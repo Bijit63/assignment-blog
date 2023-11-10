@@ -19,7 +19,7 @@ const Home = () => {
 
         <p className="text-sm text-gray-400 animate-fadeIn">We look forward to delivering innovative solutions and driving success in our projects.</p>
       </div>
-
+      
     </div>
   );
 }

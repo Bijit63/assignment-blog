@@ -58,6 +58,14 @@ const Imageforgery = () => {
       element.classList.add('hidden');
     }
   };
+  const hidedown = () => {
+    const element = document.getElementById('modaldown');
+  
+    if (element.classList.contains('flex')) {
+      element.classList.remove('flex', 'popup'); // Remove the popup animation class
+      element.classList.add('hidden');
+    }
+  };
 
 
 
@@ -81,7 +89,7 @@ const Imageforgery = () => {
       console.log('Response:', response.data.message);
       setactiveimage(response.data.message);
   
-    const element = document.getElementById('modal');
+    const element = document.getElementById('modaldown');
     element.classList.remove('hidden');
     element.classList.add('flex', 'popup'); 
 
@@ -95,6 +103,47 @@ const Imageforgery = () => {
     }
 
   };
+
+
+
+
+
+
+
+  const handleDownload = async () => {
+    if (activeimage) {
+      try {
+        const response = await fetch(activeimage);
+        const blob = await response.blob();
+  
+        // Create a link element
+        const link = document.createElement('a');
+  
+        // Create a Blob URL from the blob
+        const blobUrl = window.URL.createObjectURL(blob);
+  
+        // Set the download attribute with a suggested filename
+        link.download = 'downloaded_image';
+  
+        // Set the href attribute to the Blob URL
+        link.href = blobUrl;
+  
+        // Append the link element to the document
+        document.body.appendChild(link);
+  
+        // Trigger a click on the link element to start the download
+        link.click();
+  
+        // Remove the link element and revoke the Blob URL
+        document.body.removeChild(link);
+        window.URL.revokeObjectURL(blobUrl);
+      } catch (error) {
+        console.error('Error downloading image:', error);
+      }
+    }
+  };
+  
+
 
 
 
@@ -118,10 +167,10 @@ const Imageforgery = () => {
           
            </div>
 
-      <div className='max-w-[600px] z-20 max-h-[650px]  m-auto relative my-auto flex flex-col  ' >
+      <div className='max-w-[600px] z-20 max-h-[630px]  m-auto relative my-auto flex flex-col  ' >
 
         <div >
-            <img src={activeimage} alt="" className='max-w-[650px] z-20 max-h-[650px] bg-black m-auto relative mt-6 '  />
+            <img src={activeimage} alt="" className='max-w-[650px] z-20 max-h-[610px] bg-black m-auto relative mt-6 '  />
 
         </div>
 
@@ -132,6 +181,32 @@ const Imageforgery = () => {
       
 
 {/* MOdal  */}
+
+
+
+
+{/* MOdal for download  */}
+
+        <div  id='modaldown' className='hidden w-[100vw] h-[100vh] absolute'>
+
+        <div id='modalbackdown' onClick={hidedown} className='w-[100vw] h-[100vh] bg-black opacity-60 cursor-pointer absolute z-10 top-0 bottom-0'>
+          {/* <p className='text-8xl '>x</p> */}
+           </div>
+
+      <div className='max-w-[600px] z-20 max-h-[660px]  m-auto relative my-auto flex flex-col  ' >
+
+        <div className='flex flex-col '>
+            <img src={activeimage} alt="" className='max-w-[650px] z-20 max-h-[600px] bg-black m-auto relative mt-6 '  />
+      <button onClick={handleDownload} className='text-white bg-blue-700 hover:bg-blue-800 px-2 py-[2px]  rounded mt-[15px] w-fit mx-auto' >Download</button>
+        </div>
+
+      </div>
+
+
+    </div>
+      
+
+{/* MOdal for download  */}
 
 
 

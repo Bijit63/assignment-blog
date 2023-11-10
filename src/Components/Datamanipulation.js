@@ -123,8 +123,8 @@ const DataManipulation = () => {
           
            </div>
 
-        <div className='max-w-[600px] z-20 max-h-[650px]  m-auto relative my-auto flex ' >
-            <img src={activeimage} alt="" className='max-w-[650px] z-20 max-h-[650px] bg-black m-auto relative mt-6 '  />
+        <div className='max-w-[600px] z-20 max-h-[630px]  m-auto relative my-auto flex ' >
+            <img src={activeimage} alt="" className='max-w-[650px] z-20 max-h-[610px] bg-black m-auto relative mt-6 '  />
 
         </div>
 

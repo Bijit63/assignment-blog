@@ -19,19 +19,24 @@ const Preview = (props) => {
     }
   return (
 
-    <div id='modal' className={` w-[100vw] h-[100vh] absolute `}>
+    <div  id='modal' className='hidden w-[100vw] h-[100vh] absolute'>
 
-        <div onClick={hide} className='w-[100vw] h-[100vh] bg-black opacity-20 cursor-pointer absolute z-10 top-0 bottom-0'> </div>
+    <div id='modalback' onClick={hide} className='w-[100vw] h-[100vh] bg-black opacity-60 cursor-pointer absolute z-10 top-0 bottom-0'>
+      {/* <p className='text-8xl '>x</p> */}
+      
+       </div>
 
-        <div className='w-[500px] z-20 h-[650px] bg-green-800 m-auto relative mt-6 '>
-            <img src={props.image} alt="" />
+  <div className='max-w-[600px] z-20 max-h-[630px]  m-auto relative my-auto flex flex-col  ' >
 
-        </div>
-
-        <button>download</button>
-
+    <div >
+        <img src='' alt="" className='max-w-[650px] z-20 max-h-[610px] bg-black m-auto relative mt-6 '  />
 
     </div>
+
+  </div>
+
+
+</div>
   )
 }
 
